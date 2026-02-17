@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
@@ -27,16 +29,13 @@ export default function Contact() {
     setError("");
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/contact",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`${API_URL}/api/contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       const data = await response.json();
 
@@ -90,7 +89,6 @@ export default function Contact() {
     >
       <div className="max-w-6xl mx-auto">
 
-        {/* Section Header */}
         <div className="mb-16 text-center md:text-left">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Get In Touch
@@ -101,7 +99,6 @@ export default function Contact() {
           </p>
         </div>
 
-        {/* Contact Cards */}
         <div className="grid md:grid-cols-3 gap-8 mb-16">
           {contactInfo.map((info) => {
             const IconComponent = info.icon;
@@ -125,7 +122,6 @@ export default function Contact() {
           })}
         </div>
 
-        {/* Form Section */}
         <div className="grid md:grid-cols-2 gap-12">
 
           <div className="space-y-6">
@@ -133,7 +129,7 @@ export default function Contact() {
               Send Me a Message
             </h3>
             <p className="text-gray-600 leading-relaxed">
-              Feel free to send me a message. I’ll get back to you as soon as possible!
+              Feel free to send me a message. I’ll get back to you soon!
             </p>
           </div>
 
@@ -187,7 +183,7 @@ export default function Contact() {
 
             {submitted && (
               <div className="p-4 bg-green-100 border border-green-300 text-green-700 rounded-lg text-sm">
-                Message sent successfully! I’ll get back to you soon.
+                Message sent successfully!
               </div>
             )}
 

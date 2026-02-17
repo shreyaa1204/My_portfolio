@@ -51,7 +51,7 @@ export default function Projects() {
       ],
       tags: ["React", "Tailwind CSS", "MongoDB"],
       liveLink: "#",
-      github: "#",
+      github: "https://github.com/shreyaa1204/My_portfolio",
     },
   ];
 
